@@ -5,6 +5,9 @@
     <title>投稿一覧</title>
 </head>
 <body>
+    <?php if($flash_message !== null): ?>
+    <p><?= $flash_message ?></p>
+    <? endif; ?>
     <h1>投稿一覧</h1>
     <a href="new.php">新規投稿</a><br/>
     <br/>
@@ -21,5 +24,6 @@
     <br/>
     <br/>
     <br/>
+    <a href="logout.php">ログアウト</a>
 </body>
 </html>
