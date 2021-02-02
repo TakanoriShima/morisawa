@@ -1,4 +1,5 @@
 <?php
+    require_once 'config.php';
     require_once "Comment.php";
     //dao
     class CommentDAO {
@@ -12,7 +13,7 @@
                  PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_CLASS,
                  PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',  
             );
-            $dbh = new PDO($dsn, $username, $password, $options);
+            $dbh = new PDO(DSN, DB_USERNAME, DB_PASSWORD, $options);
             return $dbh;
         }
         //データーベースから切断するメソッド
