@@ -1,13 +1,23 @@
 <?php
-    require_once "HumanDAO.php";
+
+    require_once "MessageDAO.php";
     session_start();
     
-    $human = $_SESSION['human'];
+    $login_user = $_SESSION['login_user'];
     
-    $human = HumanDAO::insert($human);
+    if($login_user === null){
+        $_SESSION['error_message'] = 'ログインしてください';
+        header('Location: login.php');
+        exit;
+    }
     
+    $message = $_SESSION['message'];
+    $_SESSION['message'] = null;
 
-    
+    if($message !== null){
+        MessageDAO::insert($message);
+    }    
+
 ?>
 
 <!DOCTYPE html>

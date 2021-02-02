@@ -14,6 +14,10 @@
             $this->password = $password;
         }
         
+        public function get_id(){
+            return $this->id;
+        }
+        
         // 入力チェック
         public function validate(){
             $errors = array();

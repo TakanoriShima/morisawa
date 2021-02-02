@@ -1,6 +1,14 @@
 <?php
-    require_once 'human.php';
+    // require_once 'human.php';
     session_start();
+    
+    $login_user = $_SESSION['login_user'];
+    
+    if($login_user === null){
+        $_SESSION['error_message'] = 'ログインしてください';
+        header('Location: login.php');
+        exit;
+    }
     
     $errors = array();
 
@@ -24,12 +32,10 @@
         <?php endforeach; ?>
         </ul>
     <form action="check.php" method="post" enctype="multipart/form-data">
-        名前
-        <div><input type="text" name="name"></div><br/>
         タイトル
         <div><input type="text" name="title"></div><br/>
         メッセージ
-        <div><input type="text" name="message"></div><br/>
+        <div><input type="text" name="content"></div><br/>
         画像
         <div><input type="file" name="image" style="width:400px"></div><br/>
         <br/>

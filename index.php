@@ -1,8 +1,8 @@
 <?php
-    require_once "HumanDAO.php";
+    require_once "MessageDAO.php";
     session_start();
         
-    $humans = HumanDAO::get_all_humans();
+    $messages = MessageDAO::get_all_messages();
     
     $login_user = $_SESSION['login_user'];
     

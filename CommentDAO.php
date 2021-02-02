@@ -27,10 +27,10 @@
         public static function insert_comment($comment){
             try{
                 $dbh = self::get_connection();
-                $stmt = $dbh->prepare('insert into comments (message_id, name, message) values (:message_id, :name, :message)');
-                $stmt->bindValue(':name', $comment->name, PDO::PARAM_STR);
-                $stmt->bindValue(':message',$comment->message,PDO::PARAM_STR);
+                $stmt = $dbh->prepare('insert into comments (user_id, message_id, content) values (:user_id, :message_id, :content)');
+                $stmt->bindValue(':user_id', $comment->user_id, PDO::PARAM_INT);
                 $stmt->bindValue(':message_id',$comment->message_id,PDO::PARAM_INT);
+                $stmt->bindValue(':content',$comment->content,PDO::PARAM_STR);
                 
                 $stmt->execute();
             }catch(PDOException $e){
@@ -46,7 +46,9 @@
                 $stmt = $dbh->prepare('select * from comments where message_id = :message_id order by id desc');
                 $stmt->bindValue(':message_id',$id,PDO::PARAM_INT);
                 $stmt->execute();
-                $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Comment');
+                
+                $comments = $stmt->fetchAll();
                 
             } catch(PDOException $e) {
                 

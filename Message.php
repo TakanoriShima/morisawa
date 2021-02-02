@@ -1,30 +1,31 @@
 <?php
     
-    class Human{
+    require_once 'UserDAO.php';
+    
+    class Message{
         
-        public $name; 
+        public $id;
+        public $usre_id;
         public $title;
-        public $message;
+        public $content;
         public $image;
+        public $created_at;
 
-        public function __construct($name="", $title="",$message="",$image=""){
-            $this->name = $name;
+        public function __construct($user_id="", $title="",$content="",$image=""){
+            $this->user_id = $user_id;
             $this->title = $title;
-            $this->message = $message;
+            $this->content = $content;
             $this->image = $image;
         }
         
         public function validate(){
             $errors = array();
-             if($this->name === ''){
-                $errors[] = "お名前を入力してください";
-             }
     
              if($this->title === ''){
                 $errors[] = "タイトルを入力してください";
              }
              
-             if($this->message === ''){
+             if($this->content === ''){
                  $errors[] = "内容を入力してください";
              }
              
@@ -33,6 +34,12 @@
         
              }
             return $errors;
+        }
+        
+        // 投稿したユーザ情報を取得するメソッド
+        public function get_user(){
+            $user = UserDAO::get_user_by_id($this->user_id);
+            return $user;
         }
     }
 ?>

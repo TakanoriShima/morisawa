@@ -1,32 +1,34 @@
 <?php
     
+    require_once 'UserDAO.php';
+    
     class Comment{
         
         public $id;
+        public $user_id;
         public $message_id;
-        public $name; 
-        public $message;
+        public $content;
         public $created_at;
         
-
-        public function __construct($message_id="", $name="", $message=""){
+        public function __construct($user_id="", $message_id="", $content=""){
+            $this->user_id = $user_id;
             $this->message_id = $message_id;
-            $this->name = $name;
-            $this->message = $message;
+            $this->content = $content;
         }
         
         public function validate(){
             $errors = array();
-             if($this->name === ''){
-                $errors[] = "お名前を入力してください";
-             }
 
-             
-             if($this->message === ''){
+             if($this->content === ''){
                  $errors[] = "内容を入力してください";
              }
             
             return $errors;
+        }
+        
+        public function get_user(){
+            $user = UserDAO::get_user_by_id($this->user_id);
+            return $user;
         }
     }
 ?>

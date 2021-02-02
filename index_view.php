@@ -7,20 +7,19 @@
 <body>
     <?php if($flash_message !== null): ?>
     <p><?= $flash_message ?></p>
-    <? endif; ?>
+    <?php endif; ?>
     <h1>投稿一覧</h1>
     <a href="new.php">新規投稿</a><br/>
     <br/>
-    <?php foreach($humans as $human): ?>
-    <a href='show.php?id=<?= $human->id ?>'><?= $human->id ?></a>　<?= $human->name ?>　<?= $human->title ?><br/>
+    <?php foreach($messages as $message): ?>
+    <a href='show.php?id=<?= $message->id ?>'><?= $message->id ?></a>　<?= $message->get_user()->name ?>　<?= $message->title ?><br/>
     <br/>
-    <?= $human->message ?><br/>
-    <img src='upload/<?= $human->image ?>'><br/>
-    <?= $human->created_at ?><br/>
+    <?= $message->content ?><br/>
+    <img src='upload/<?= $message->image ?>' style="width: 200px;"><br/>
+    <?= $message->created_at ?><br/>
     <hr/>
     <?php endforeach; ?>
 
-    
     <br/>
     <br/>
     <br/>

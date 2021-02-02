@@ -1,7 +1,9 @@
 <?php
-    require_once "human.php";
+    require_once "Message.php";
+    require_once "User.php";
+    
     //dao
-    class HumanDAO {
+    class MessageDAO {
         //データーベースへ接続メソッド
         public static function get_connection(){
             $dsn = 'mysql:host=localhost;dbname=sns';
@@ -21,12 +23,12 @@
             $stmt = null;
             
         }
-        //データーベースから全会員情報を取得するメソッド
-        public static function get_all_humans(){
+        //データーベースから全投稿情報を取得するメソッド
+        public static function get_all_messages(){
             try {
                 $dbh = self::get_connection();
-                $stmt = $dbh->query('select * from sns.sample order by id desc');
-                $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Human');
+                $stmt = $dbh->query('select * from sns.messages order by id desc');
+                $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Message');
                 $humans = $stmt->fetchAll();
                 
             } catch(PDOException $e) {
@@ -36,16 +38,16 @@
             }
             return $humans;
          }
-        //データーベースに新規会員を登録するメソッド
-        public static function insert($human){
+        //データーベースに新規投稿を登録するメソッド
+        public static function insert($message){
             try{
                 $dbh = self::get_connection();
-                $stmt = $dbh->prepare('insert into sample (name,title,message,image) values (:name, :title, :message, :image)');
-                $stmt->bindParam(':name', $human->name, PDO::PARAM_STR);
-                $stmt->bindValue(':title',$human->title,PDO::PARAM_STR);
-                $stmt->bindValue(':message',$human->message,PDO::PARAM_STR);
-                $stmt->bindValue(':image',$human->image);
-                $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Human');
+                $stmt = $dbh->prepare('insert into messages (user_id, title, content, image) values (:user_id, :title, :content, :image)');
+                $stmt->bindParam(':user_id', $message->user_id, PDO::PARAM_STR);
+                $stmt->bindValue(':title',$message->title,PDO::PARAM_STR);
+                $stmt->bindValue(':content',$message->content,PDO::PARAM_STR);
+                $stmt->bindValue(':image',$message->image);
+                // $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Human');
                 $stmt->execute();
                 
             }catch(PDOException $e){
@@ -55,11 +57,11 @@
             }
         }
         
-        //IDを指定して会員を削除するメソッド
+        //IDを指定して投稿を削除するメソッド
         public static function delete($id){
             try{
                 $dbh = self::get_connection();
-                $stmt = $dbh->prepare('delete from sample where id = :id');
+                $stmt = $dbh->prepare('delete from sns.messages where id = :id');
                 $stmt->bindValue(':id',$id,PDO::PARAM_INT);
                 $stmt->execute();
                 
@@ -69,31 +71,30 @@
                 self::close_connection($dbh, $stmt);
             }
         }
-        //IDを指定して一人の会員を抜き出すメソッド
-        public static function get_human_by_id($id){
+        //IDを指定して一人の投稿を抜き出すメソッド
+        public static function get_message_by_id($id){
             try{
                 $dbh = self::get_connection();
-                $stmt = $dbh->prepare('select * from sample where id = :id');
+                $stmt = $dbh->prepare('select * from sns.messages where id = :id');
                 $stmt->bindValue(':id',$id,PDO::PARAM_INT);
                 $stmt->execute();
-                $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Human');
-                $human = $stmt->fetch();
+                $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Message');
+                $message = $stmt->fetch();
             }catch(PDOException $e){
                 
             }finally{
                 self::close_connection($dbh, $stmt);
             }
-            return $human;
+            return $message;
         }
-        //IDを指定して会員情報を変更するメソッド
-        public static function update($id, $name, $title, $mes, $image_name){
+        //IDを指定して投稿情報を変更するメソッド
+        public static function update($id, $user_id, $title, $content, $image){
             try{
                 $dbh = self::get_connection();
-                $stmt = $dbh->prepare('update sample set name= :name,title= :title, message= :message, image= :image where id= :id');
-                $stmt->bindValue(':name',$name,PDO::PARAM_STR);
+                $stmt = $dbh->prepare('update sns.messages set title= :title, content= :content, image= :image where id= :id');
                 $stmt->bindValue(':title',$title,PDO::PARAM_STR);
-                $stmt->bindValue(':message',$mes,PDO::PARAM_STR);
-                $stmt->bindValue(':image',$image_name);
+                $stmt->bindValue(':content',$content,PDO::PARAM_STR);
+                $stmt->bindValue(':image',$image);
                 $stmt->bindValue(':id',$id,PDO::PARAM_INT);
                 $stmt->execute();
             }catch(PDOException $e){
@@ -103,7 +104,7 @@
             }
         }
     
-              // ファイルをアップロードするメソッド
+             // ファイルをアップロードするメソッド
     public function upload(){
         // ファイルを選択していれば
         if (!empty($_FILES['image']['name'])) {
@@ -121,4 +122,5 @@
             return '';
         }
     }
+
 }
