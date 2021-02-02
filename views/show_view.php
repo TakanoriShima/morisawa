@@ -15,7 +15,11 @@
         <img src='upload/<?= $message->image ?>'>
     </ul>
     <?php if($message->user_id === $login_user->id): ?>
-    <a href='edit.php?id=<?= $message->id ?>'>編集</a> <a href='delete.php?id=<?= $message->id ?>'>削除</a>
+    <a href='edit.php?id=<?= $message->id ?>'>編集</a> 
+    <form action="delete.php" method="POST">
+        <input type="hidden" name="id" value="<?= $message->id ?>">
+        <input type="submit" value="削除">
+    </form>
     <br/>
     <br/>
     <?php endif; ?>

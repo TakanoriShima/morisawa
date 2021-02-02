@@ -8,6 +8,11 @@
     <?php if($flash_message !== null): ?>
     <p><?= $flash_message ?></p>
     <?php endif; ?>
+    
+    <?php if($error_message !== null): ?>
+    <p><?= $error_message ?></p>
+    <?php endif; ?>
+    
     <h1>投稿一覧</h1>
     <a href="new.php">新規投稿</a><br/>
     <br/>

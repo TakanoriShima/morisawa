@@ -6,11 +6,13 @@
 </head>
 <body>
     <h1>新規投稿</h1>
+    <?php if($errors !== null): ?>
     <ul>
-        <?php foreach($errors as $error): ?>
-            <li><?= $error ?></li>
-        <?php endforeach; ?>
-        </ul>
+    <?php foreach($errors as $error): ?>
+        <li><?= $error ?></li>
+    <?php endforeach; ?>
+    </ul>
+    <?php endif; ?>
     <form action="create.php" method="post" enctype="multipart/form-data">
         タイトル
         <div><input type="text" name="title"></div><br/>

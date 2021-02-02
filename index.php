@@ -1,24 +1,19 @@
 <?php
+    require_once 'filters/login_filter.php';
     require_once "daos/MessageDAO.php";
+    
     session_start();
         
     $messages = MessageDAO::get_all_messages();
     
-    $login_user = $_SESSION['login_user'];
+    $flash_message = $_SESSION['flash_message'];
+    $_SESSION['flash_message'] = null;
     
-    if($login_user !== null){
-        $flash_message = $_SESSION['flash_message'];
-        var_dump($flash_message);
-        $_SESSION['flash_message'] = null;
-        include_once "views/index_view.php";
-    }else{
-        $_SESSION['error_message'] = 'ログインしてください';
-        header('Location: login.php');
-        exit;
-    }
+    $error_message = $_SESSION['error_message'];
+    $_SESSION['error_message'] = null;
     
-   
-?>
+    include_once "views/index_view.php";
+
 
     
 

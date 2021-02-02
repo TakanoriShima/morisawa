@@ -1,4 +1,8 @@
 <?php
+    
+    require_once 'filters/login_filter.php';
+    require_once 'filters/post_filter.php';
+
     require_once 'daos/MessageDAO.php';
     session_start();
     
