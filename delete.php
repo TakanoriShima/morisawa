@@ -1,9 +1,14 @@
 <?php
-    require_once "HumanDAO.php";
+    require_once "MessageDAO.php";
+    session_start();
     
-    $code = $_GET['id'];
+    $id = $_GET['id'];
         
-    HumanDAO::delete($code);
+    MessageDAO::delete($id);
+    
+    $_SESSION['flash_message'] = '投稿を削除しました';
+    header('Location: index.php');
+    exit;
     
 ?>
 
