@@ -88,7 +88,7 @@
             return $message;
         }
         //IDを指定して投稿情報を変更するメソッド
-        public static function update($id, $user_id, $title, $content, $image){
+        public static function update($id, $title, $content, $image){
             try{
                 $dbh = self::get_connection();
                 $stmt = $dbh->prepare('update sns.messages set title= :title, content= :content, image= :image where id= :id');

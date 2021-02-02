@@ -14,9 +14,11 @@
         <li>画像：</li>
         <img src='upload/<?= $message->image ?>'>
     </ul>
+    <?php if($message->user_id === $login_user->id): ?>
     <a href='edit.php?id=<?= $message->id ?>'>編集</a> <a href='delete.php?id=<?= $message->id ?>'>削除</a>
     <br/>
     <br/>
+    <?php endif; ?>
     
     <?php if($flash_message !== null): ?>
     <p><?= $flash_message ?></p>

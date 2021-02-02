@@ -1,27 +1,16 @@
 <?php
-    require_once 'HumanDAO.php';
+    require_once 'MessageDAO.php';
+    session_start();
     
-    $name = $_POST['name'];
     $title = $_POST['title'];
-    $message = $_POST['message'];
-    $code = $_GET['id'];
+    $content = $_POST['content'];
+    $id = $_POST['id'];
     
-    $image_name = HumanDAO::upload();
+    $image = MessageDAO::upload();
     
-    HumanDAO::update($code, $name, $title, $message, $image_name);
-    
+    MessageDAO::update($id, $title, $content, $image);
 
-    ?>
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>詳細更新</title>
-</head>
-<body>
-    <p>更新しました。</p>
-    
-    <a href="index.php">投稿一覧へ</a>
-    
-</body>
-</html>
+    $_SESSION['flash_message'] = '投稿を編集しました';
+    header('Location: show.php?id=' . $id);
+    exit;
+
