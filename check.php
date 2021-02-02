@@ -9,7 +9,7 @@
     $message = $_POST['message'];
     
     $image_name = HumanDAO::upload();
-    var_dump($image_name);
+    // var_dump($image_name);
     $human = new Human($name, $title,$message,$image_name);
     $errors = $human->validate();
     

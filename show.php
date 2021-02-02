@@ -34,12 +34,14 @@
     <br/>
     <br/>
     
-    
+    <?php if(count($errors) !== 0): ?>
     <h1>コメント一覧</h1>
     <?php foreach($errors as $error): ?>
     <?= $error ?><br/>
     <?php endforeach; ?>
+    <?php endif; ?>
     
+    <?php if(count($comments) !== 0): ?>
     <?php foreach($comments as $comment): ?>
     <?= $comment['id']; ?>　<?= $comment['name']; ?><br/>
     <br/>
@@ -47,6 +49,7 @@
     <?= $comment['created_at']; ?><br/>
     <hr/>
     <?php endforeach; ?>
+    <?php endif; ?>
     
     <br/>
     <br/>

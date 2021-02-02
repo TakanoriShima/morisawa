@@ -7,7 +7,7 @@
         public $message;
         public $image;
 
-        public function __construct($name, $title,$message,$image){
+        public function __construct($name="", $title="",$message="",$image=""){
             $this->name = $name;
             $this->title = $title;
             $this->message = $message;

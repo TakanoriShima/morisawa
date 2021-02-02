@@ -6,7 +6,7 @@
         public static function get_connection(){
             $dsn = 'mysql:host=localhost;dbname=sns';
             $username = 'root';
-            $password = 'araki1123';
+            $password = '';
             $options = array(
                  PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                  PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_CLASS,

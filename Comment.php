@@ -9,7 +9,7 @@
         public $created_at;
         
 
-        public function __construct($message_id, $name, $message){
+        public function __construct($message_id="", $name="", $message=""){
             $this->message_id = $message_id;
             $this->name = $name;
             $this->message = $message;
