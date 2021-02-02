@@ -1,6 +1,6 @@
 <?php
     
-    require_once 'UserDAO.php';
+    require_once 'daos/UserDAO.php';
     
     class Comment{
         

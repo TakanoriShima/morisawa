@@ -1,6 +1,6 @@
 <?php
     require_once 'config.php';
-    require_once "Comment.php";
+    require_once "models/Comment.php";
     //dao
     class CommentDAO {
         //データーベースへ接続メソッド

@@ -1,6 +1,6 @@
 <?php
-    require_once "CommentDAO.php";
-    require_once "UserDAO.php";
+    require_once "daos/CommentDAO.php";
+    require_once "daos/UserDAO.php";
     session_start();
     
     $login_user = $_SESSION['login_user'];

@@ -1,6 +1,6 @@
 <?php
 
-    require_once "MessageDAO.php";
+    require_once "daos/MessageDAO.php";
     session_start();
     
     $login_user = $_SESSION['login_user'];
@@ -16,21 +16,11 @@
 
     if($message !== null){
         MessageDAO::insert($message);
+        $_SESSION['flash_message'] = '投稿が完了しました';
+        header('Location: index.php');
+        exit;
     }    
 
 ?>
 
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>完了</title>
-</head>
-<body>
-    <h1>投稿しました</h1>
-    
-    <a href="index.php">投稿一覧へ</a>
-    
-</body>
-</html>
 

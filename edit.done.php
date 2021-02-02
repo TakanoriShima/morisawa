@@ -1,5 +1,5 @@
 <?php
-    require_once 'MessageDAO.php';
+    require_once 'daos/MessageDAO.php';
     session_start();
     
     $title = $_POST['title'];

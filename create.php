@@ -5,7 +5,7 @@
         exit;
     }
     
-    require_once 'MessageDAO.php';
+    require_once 'daos/MessageDAO.php';
     session_start();
     
     $login_user = $_SESSION['login_user'];
@@ -22,7 +22,7 @@
     $content = $_POST['content'];
     
     $image = MessageDAO::upload();
-    // var_dump($image_name);
+
     $message = new Message($login_user->id, $title, $content, $image);
     $errors = $message->validate();
     

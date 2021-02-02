@@ -7,4 +7,4 @@
     $error_message = $_SESSION['error_message'];
     $_SESSION['error_message'] = null;
     
-    include_once 'login_view.php';
+    include_once 'views/login_view.php';

@@ -1,6 +1,6 @@
 <?php
-    require_once "MessageDAO.php";
-    require_once "CommentDAO.php";
+    require_once "daos/MessageDAO.php";
+    require_once "daos/CommentDAO.php";
     session_start();
     
     $login_user = $_SESSION['login_user'];
@@ -25,6 +25,6 @@
     $errors = $_SESSION['errors'];
     $_SESSION['errors'] = null;
     
-    include_once 'show_view.php';
+    include_once 'views/show_view.php';
  
 

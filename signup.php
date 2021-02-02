@@ -4,4 +4,4 @@
     $errors = $_SESSION['errors'];
     $_SESSION['errors'] = null;
 
-    include_once 'signup_view.php';
+    include_once 'views/signup_view.php';

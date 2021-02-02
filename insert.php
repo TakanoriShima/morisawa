@@ -1,8 +1,6 @@
 <?php
-    require_once 'UserDAO.php';
+    require_once 'daos/UserDAO.php';
     session_start();
-    // var_dump($_POST);
-    // require_once 'UserDAO.php';
     
     $name = $_POST['name'];
     $email = $_POST['email'];
@@ -22,4 +20,3 @@
         exit;
     }
     
-    // var_dump($errors);

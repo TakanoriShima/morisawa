@@ -1,6 +1,6 @@
 <?php
     require_once 'config.php';
-    require_once 'User.php';
+    require_once 'models/User.php';
     
     // DAO
     class UserDAO{
